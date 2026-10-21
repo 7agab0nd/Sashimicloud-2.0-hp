@@ -23,6 +23,7 @@
   if(event.target.name!=='sky'||!['auto','day','sunset','night'].includes(event.target.value))return;
   preference=event.target.value;try{localStorage.setItem('sashimicloud-sky',preference)}catch{}
   applySky();
+  skyMenu.open=false;
  });
  // Refresh automatic light after crossing a local-time boundary, including resumed tabs.
  setInterval(()=>{if(preference==='auto'&&!document.hidden)applySky()},60000);
@@ -62,12 +63,12 @@
  const cat=document.querySelector('.cat');const cloud=document.querySelector('.cloud-companion');
  const status=document.getElementById('companion-status');let catTimer,cloudTimer,statusTimer;let petCount=0;
  function announce(message){clearTimeout(statusTimer);status.textContent='';statusTimer=setTimeout(()=>{status.textContent=message},35)}
- cat.addEventListener('click',()=>{
+ cat?.addEventListener('click',()=>{
   const message=['mrrp.','prrr.','meow.'][petCount++%3];
   cat.querySelector('.cat-bubble').textContent=message;cat.classList.add('petted');
   clearTimeout(catTimer);catTimer=setTimeout(()=>cat.classList.remove('petted'),2100);announce(`The cat says ${message}`);
  });
- cloud.addEventListener('click',()=>{
+ cloud?.addEventListener('click',()=>{
   cloud.classList.add('hello');clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>cloud.classList.remove('hello'),1700);
   announce('The little cloud sparkles.');
  });

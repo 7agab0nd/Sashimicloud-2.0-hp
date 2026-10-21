@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /Sashimicloud-2.0-hp/legacy/
+Sitemap: https://7agab0nd.github.io/Sashimicloud-2.0-hp/sitemap.xml

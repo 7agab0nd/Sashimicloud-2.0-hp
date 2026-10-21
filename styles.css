@@ -65,6 +65,8 @@ html {
 }
 body {
   margin:0;
+  overflow-x:hidden;
+  overflow-x:clip;
   background:var(--sky-top);
   color:var(--ink);
   font:400 16px/1.7 Inter,system-ui,sans-serif
@@ -988,6 +990,269 @@ edges fade, beyond the text. No blur or rectangular panel borders. */
   font-size:23px;
   color:var(--accent)
 }
+/* Shared inner pages keep the same mountain world and quieter editorial type. */
+.inner-main {
+  min-height:calc(100svh - 226px)
+}
+.page-wrap {
+  padding-block:clamp(72px,10vh,128px) clamp(110px,15vh,180px)
+}
+.page-surface {
+  width:min(820px,72%);
+  padding-block:10px
+}
+.page-heading {
+  margin-bottom:54px
+}
+.page-heading h1 {
+  font:500 clamp(48px,6vw,78px)/1.08 'Space Grotesk',sans-serif;
+  letter-spacing:-3px;
+  margin:0;
+  text-wrap:balance
+}
+.page-intro {
+  max-width:620px;
+  margin:22px 0 0;
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.8;
+  text-wrap:pretty
+}
+.page-heading>.quiet-link {
+  margin-top:22px
+}
+.journal-year {
+  margin-top:50px
+}
+.journal-year>h2 {
+  color:var(--accent);
+  font:400 11px/1.5 'IBM Plex Mono',monospace;
+  letter-spacing:1.6px;
+  margin-bottom:12px
+}
+.journal-year ol {
+  list-style:none;
+  padding:0;
+  margin:0;
+  border-top:1px solid var(--line)
+}
+.journal-year li {
+  border-bottom:1px solid var(--line)
+}
+.journal-entry {
+  display:grid;
+  grid-template-columns:110px minmax(0,1fr) 28px;
+  align-items:start;
+  gap:26px;
+  padding:28px 0
+}
+.journal-entry time {
+  color:var(--quiet);
+  font:400 10px/1.8 'IBM Plex Mono',monospace;
+  padding-top:5px
+}
+.journal-entry h3 {
+  font-size:21px
+}
+.journal-entry p {
+  max-width:540px;
+  margin:8px 0 0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8
+}
+.entry-arrow {
+  color:var(--accent);
+  font-size:21px
+}
+.journal-entry:hover h3,.entry-neighbors a:hover,.back-link:hover,.feed-link:hover {
+  color:var(--accent)
+}
+.entry-page {
+  width:min(740px,68%)
+}
+.back-link {
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  min-height:44px;
+  margin-bottom:48px;
+  color:var(--muted);
+  font-size:12px
+}
+.entry-page .page-heading {
+  margin-bottom:45px
+}
+.entry-page .page-heading h1 {
+  font-size:clamp(43px,5vw,68px)
+}
+.prose {
+  color:#edf0f6;
+  font-size:18px;
+  line-height:1.95
+}
+.prose p,.prose ul {
+  margin:0 0 1.4em
+}
+.prose ul {
+  padding-left:24px
+}
+.prose li+li {
+  margin-top:10px
+}
+.entry-neighbors {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:24px;
+  margin:66px 0 20px;
+  padding-block:24px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line)
+}
+.entry-neighbors a {
+  font:500 16px/1.5 'Space Grotesk',sans-serif
+}
+.entry-neighbors a>span:first-child {
+  display:block;
+  margin-bottom:6px;
+  color:var(--quiet);
+  font:400 9px/1.5 'IBM Plex Mono',monospace;
+  letter-spacing:1px;
+  text-transform:uppercase
+}
+.entry-permalink {
+  display:inline-flex;
+  gap:14px;
+  margin-top:10px;
+  color:var(--accent);
+  font-size:12px
+}
+.interest-list {
+  border-top:1px solid var(--line)
+}
+.interest-list section {
+  display:grid;
+  grid-template-columns:46px minmax(0,1fr);
+  gap:18px;
+  padding:30px 0;
+  border-bottom:1px solid var(--line)
+}
+.interest-list h2,.project-feature h2,.about-current h2,.old-site-note h2 {
+  font-size:25px;
+  letter-spacing:-.7px
+}
+.interest-list p,.project-feature p,.old-site-note p {
+  margin:8px 0 0;
+  color:var(--muted)
+}
+.interest-list .activity-icon {
+  margin-top:4px
+}
+.page-note {
+  margin:26px 0;
+  color:var(--quiet);
+  font:400 11px/1.7 'IBM Plex Mono',monospace
+}
+.project-feature {
+  display:grid;
+  grid-template-columns:150px minmax(0,1fr);
+  gap:44px;
+  padding-block:38px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line)
+}
+.project-logo {
+  width:130px;
+  image-rendering:pixelated
+}
+.project-feature .page-intro {
+  color:var(--ink);
+  font-size:18px
+}
+.project-feature .project-meta {
+  margin-block:26px 12px
+}
+.project-feature .text-link,.old-site-note .text-link {
+  margin-top:8px
+}
+.about-prose {
+  max-width:650px
+}
+.about-current {
+  margin-top:54px;
+  padding-top:30px;
+  border-top:1px solid var(--line)
+}
+.about-current ul {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px 30px;
+  padding:0;
+  margin:24px 0 0;
+  list-style:none
+}
+.about-current li {
+  color:var(--muted)
+}
+.about-current li:before {
+  content:"";
+  display:inline-block;
+  width:3px;
+  height:3px;
+  margin:0 13px 4px 0;
+  background:var(--accent)
+}
+.old-site-note {
+  display:grid;
+  grid-template-columns:80px minmax(0,1fr);
+  gap:24px;
+  margin-top:54px;
+  padding-top:30px;
+  border-top:1px solid var(--line)
+}
+.old-site-note img {
+  width:64px;
+  height:64px;
+  image-rendering:pixelated;
+  border-radius:3px
+}
+.old-site-note .quiet-link {
+  margin-left:26px
+}
+.artwork-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:24px;
+  margin-bottom:30px
+}
+.artwork-grid figure {
+  margin:0;
+  padding:18px;
+  border:1px solid var(--line);
+  background:#101a2d66
+}
+.artwork-grid img {
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:contain;
+  image-rendering:pixelated
+}
+.artwork-grid figcaption {
+  margin-top:14px;
+  color:var(--quiet);
+  font:400 10px/1.5 'IBM Plex Mono',monospace
+}
+.missing-page {
+  padding-top:8vh
+}
+.missing-page .hero-links {
+  margin-top:34px
+}
+.feed-link {
+  color:var(--quiet);
+  font:400 9px/1 'IBM Plex Mono',monospace;
+  letter-spacing:1px
+}
 @media(min-aspect-ratio:19/10) {
   .hero {
     padding-top:6vh
@@ -1174,6 +1439,12 @@ edges fade, beyond the text. No blur or rectangular panel borders. */
   }
   .about-section {
     gap:30px
+  }
+  .page-surface,.entry-page {
+    width:min(720px,88%)
+  }
+  .page-heading h1 {
+    font-size:56px
   }
   .footer {
     min-height:110px
@@ -1478,6 +1749,104 @@ edges fade, beyond the text. No blur or rectangular panel borders. */
   }
   .about-section p {
     font-size:14px
+  }
+  .inner-main {
+    min-height:calc(100svh - 188px)
+  }
+  .page-wrap {
+    padding-block:52px 90px
+  }
+  .page-surface,.entry-page {
+    width:100%;
+    padding-block:4px
+  }
+  .page-heading {
+    margin-bottom:38px
+  }
+  .page-heading h1,.entry-page .page-heading h1 {
+    font-size:clamp(40px,12vw,52px);
+    letter-spacing:-2.2px
+  }
+  .page-intro {
+    margin-top:16px;
+    font-size:16px
+  }
+  .journal-year {
+    margin-top:38px
+  }
+  .journal-entry {
+    grid-template-columns:minmax(0,1fr) 28px;
+    gap:9px 12px;
+    padding:24px 0
+  }
+  .journal-entry time {
+    grid-column:1;
+    font-size:9px;
+    padding-top:0
+  }
+  .journal-entry>div {
+    grid-column:1 / -1
+  }
+  .journal-entry h3 {
+    font-size:19px
+  }
+  .journal-entry p {
+    font-size:14px
+  }
+  .entry-arrow {
+    grid-column:2;
+    grid-row:1
+  }
+  .back-link {
+    margin-bottom:34px
+  }
+  .entry-page .page-heading {
+    margin-bottom:36px
+  }
+  .prose {
+    font-size:17px;
+    line-height:1.9
+  }
+  .entry-neighbors {
+    grid-template-columns:1fr;
+    gap:24px;
+    margin-top:50px
+  }
+  .interest-list section {
+    grid-template-columns:38px minmax(0,1fr);
+    gap:13px;
+    padding:25px 0
+  }
+  .interest-list h2,.project-feature h2,.about-current h2,.old-site-note h2 {
+    font-size:22px
+  }
+  .project-feature {
+    grid-template-columns:1fr;
+    gap:22px;
+    padding-block:30px
+  }
+  .project-logo {
+    width:94px
+  }
+  .about-current ul {
+    grid-template-columns:1fr;
+    gap:10px
+  }
+  .old-site-note {
+    grid-template-columns:56px minmax(0,1fr);
+    gap:17px
+  }
+  .old-site-note img {
+    width:48px;
+    height:48px
+  }
+  .old-site-note .text-link,.old-site-note .quiet-link {
+    display:flex;
+    width:max-content;
+    margin-left:0
+  }
+  .artwork-grid {
+    grid-template-columns:1fr
   }
   .footer {
     min-height:110px;
