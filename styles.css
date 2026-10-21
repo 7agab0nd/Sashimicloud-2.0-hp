@@ -8,11 +8,10 @@
   --sky-top:#0c1021;
   --sky-mid:#232b49;
   --sky-bottom:#77728a;
-  --wash:rgba(11,19,37,.84);
+  --wash:rgba(11,19,37,.76);
   --wash-edge:rgba(11,19,37,.2);
   --line:rgba(207,218,240,.23);
   --panel:#152138;
-  --massif-light:brightness(.73) saturate(.74) hue-rotate(4deg);
   --moon:#e8dfce;
   --haze:#9797b7;
   --layer-y:0px;
@@ -21,43 +20,43 @@
   --cloud-y:0px;
   --ridge-y:0px;
   --view-shade:0;
-  --world-bottom:-4vh;
-  --distant:url('assets/world/distant-night.svg');
-  --ridge:url('assets/world/ridge-night.svg');
-  --front:url('assets/world/foreground-night.svg');
-  --ledge:url('assets/world/ledge-night.svg')
+  --distant:url('assets/world/distant-night.svg?v=20261021-art2');
+  --summits:url('assets/world/summits-night.svg?v=20261021-art2');
+  --ridge:url('assets/world/ridge-night.svg?v=20261021-art2');
+  --front:url('assets/world/foreground-night.svg?v=20261021-art2');
+  --ledge:url('assets/world/ledge-night.svg?v=20261021-art2')
 }
 :root[data-sky=day] {
   --sky-top:#344e68;
   --sky-mid:#7192a8;
   --sky-bottom:#b3bdc4;
   --accent:#ffcfb8;
-  --wash:rgba(22,43,62,.91);
+  --wash:rgba(22,43,62,.79);
   --wash-edge:rgba(22,43,62,.20);
   --panel:#213e55;
-  --massif-light:brightness(1.11) saturate(.66) hue-rotate(344deg);
   --moon:#ffecd0;
   --haze:#ccdedb;
-  --distant:url('assets/world/distant-day.svg');
-  --ridge:url('assets/world/ridge-day.svg');
-  --front:url('assets/world/foreground-day.svg');
-  --ledge:url('assets/world/ledge-day.svg')
+  --distant:url('assets/world/distant-day.svg?v=20261021-art2');
+  --summits:url('assets/world/summits-day.svg?v=20261021-art2');
+  --ridge:url('assets/world/ridge-day.svg?v=20261021-art2');
+  --front:url('assets/world/foreground-day.svg?v=20261021-art2');
+  --ledge:url('assets/world/ledge-day.svg?v=20261021-art2')
 }
 :root[data-sky=sunset] {
   --sky-top:#28223e;
   --sky-mid:#705772;
   --sky-bottom:#e6a28e;
   --accent:#ffd1b6;
-  --wash:rgba(30,29,49,.88);
+  --wash:rgba(30,29,49,.78);
   --wash-edge:rgba(30,29,49,.17);
   --panel:#312e48;
-  --massif-light:sepia(.13) saturate(.85) hue-rotate(333deg) brightness(.88);
   --moon:#ffe4b9;
   --haze:#e6b1bb;
-  --distant:url('assets/world/distant-sunset.svg');
-  --ridge:url('assets/world/ridge-sunset.svg');
-  --front:url('assets/world/foreground-sunset.svg');
-  --ledge:url('assets/world/ledge-sunset.svg')
+  --distant:url('assets/world/distant-sunset.svg?v=20261021-art2');
+  --summits:url('assets/world/summits-sunset.svg?v=20261021-art2');
+  --ridge:url('assets/world/ridge-sunset.svg?v=20261021-art2');
+  --front:url('assets/world/foreground-sunset.svg?v=20261021-art2');
+  --ledge:url('assets/world/ledge-sunset.svg?v=20261021-art2')
 }
 * {
   box-sizing:border-box
@@ -155,15 +154,17 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible {
   background:radial-gradient(ellipse at 72% 58%,var(--haze),transparent 65%);
   opacity:.19
 }
+/* Shared art coordinates keep every ridge joined to the same valley.
+   SVGs have a separate portrait composition and no bitmap seam or crop. */
 .scenery {
   position:absolute;
   left:0;
-  bottom:var(--world-bottom);
+  bottom:0;
   width:100%;
-  height:max(100%,64vw);
+  height:100%;
   background-repeat:no-repeat;
   background-position:center bottom;
-  background-size:100% auto;
+  background-size:100% 100%;
   transform:translate3d(0,var(--layer-y),0)
 }
 .distant {
@@ -172,32 +173,20 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible {
   opacity:.6
 }
 .summits {
-  background-image:url('assets/alpine-massif.webp');
-  /* Keep the complete 3:2 image inside its layer. A viewport-height layer
-     with a width-sized background cropped the summit on wide screens. */
-  left:auto;
-  right:0;
-  width:min(100vw,120svh);
-  height:min(66.666667vw,80svh);
-  background-size:contain;
-  background-position:right bottom;
-  background-repeat:no-repeat;
-  mask-image:linear-gradient(90deg,transparent,#000 26%);
-  opacity:.78;
-  filter:var(--massif-light);
-  transform:translate3d(0,var(--layer-y),0);
-  bottom:-4svh
+  background-image:var(--summits);
+  bottom:-2%;
+  transform:translate3d(0,var(--layer-y),0)
 }
 .ridge {
   background-image:var(--ridge);
   transform:translate3d(0,var(--ridge-y),0);
-  bottom:-13vh;
-  opacity:.91
+  bottom:-3%;
+  opacity:1
 }
 .foreground {
   background-image:var(--front);
   transform:translate3d(0,var(--near-y),0);
-  bottom:-6vh
+  bottom:-3%
 }
 .world-shade {
   position:absolute;
@@ -270,15 +259,15 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible {
   animation:drift 36s ease-in-out infinite alternate
 }
 .cloud-one {
-  width:98px;
-  left:4%;
-  top:48%;
+  width:76px;
+  left:8%;
+  top:65%;
   opacity:.32
 }
 .cloud-two {
   width:55px;
-  left:46%;
-  top:53%;
+  left:43%;
+  top:68%;
   opacity:.26
 }
 .cloud-two img {
@@ -439,8 +428,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible {
   z-index:2
 }
 .hero h1 {
-  font:500 clamp(66px,6.5vw,98px)/1.06 'Space Grotesk',sans-serif;
-  letter-spacing:-5px;
+  font:500 clamp(54px,5vw,76px)/1.1 'Space Grotesk',sans-serif;
+  letter-spacing:-3.6px;
   margin:0 0 24px;
   white-space:nowrap
 }
@@ -512,12 +501,12 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible {
 }
 .cloud-companion {
   position:absolute;
-  left:62%;
-  top:19%;
+  left:58%;
+  top:24%;
   background:none;
   border:0;
   padding:12px;
-  width:150px;
+  width:122px;
   animation:float-cloud 17s ease-in-out infinite alternate;
   image-rendering:pixelated
 }
@@ -675,13 +664,13 @@ h3 {
   padding-bottom:110px;
   min-height:830px;
   display:grid;
-  grid-template-columns:minmax(0,770px) 1fr;
+  grid-template-columns:minmax(0,720px) 1fr;
   gap:12%
 }
 .journal-surface {
   position:relative;
-  padding:42px 46px;
-  background:linear-gradient(110deg,var(--wash) 75%,var(--wash-edge));
+  padding:32px 36px;
+  background:linear-gradient(110deg,var(--wash),var(--wash-edge));
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
   border-radius:2px;
@@ -812,7 +801,8 @@ h3 {
   width:50%;
   padding:40px;
   position:relative;
-  background:radial-gradient(ellipse at center,var(--wash),var(--wash-edge) 65%,transparent 80%)
+  background:linear-gradient(110deg,var(--wash),var(--wash-edge));
+  border-left:1px solid var(--line)
 }
 .section-description {
   color:var(--muted);
@@ -876,9 +866,10 @@ h3 {
 .projects:before,.currently:before,.about-section:before {
   content:"";
   position:absolute;
-  inset:-25px -35px;
+  inset:-8px -22px;
   z-index:-1;
-  background:radial-gradient(ellipse,var(--wash) 0%,var(--wash-edge) 55%,transparent 73%);
+  background:linear-gradient(110deg,var(--wash),var(--wash-edge));
+  border-top:1px solid var(--line);
   pointer-events:none
 }
 .project {
@@ -1011,7 +1002,7 @@ h3 {
     padding-top:6vh
   }
   .hero h1 {
-    font-size:80px
+    font-size:72px
   }
 }
 @media(min-width:1700px) {
@@ -1025,7 +1016,7 @@ h3 {
     font-size:104px
   }
   .hero {
-    padding-top:18vh
+    padding-top:13vh
   }
   .cat-ledge {
     right:3%;
@@ -1046,7 +1037,7 @@ h3 {
     font-size:18px
   }
   .hero h1 {
-    font-size:72px;
+    font-size:64px;
     letter-spacing:-4px
   }
   .journal-section {
@@ -1143,7 +1134,7 @@ h3 {
     padding-top:80px
   }
   .hero h1 {
-    font-size:66px;
+    font-size:60px;
     letter-spacing:-3.6px
   }
   .cloud-companion {
@@ -1208,19 +1199,22 @@ h3 {
 }
 @media(max-width:600px) {
   :root {
-    --distant:url('assets/world/distant-night-mobile.svg');
-    --ridge:url('assets/world/ridge-night-mobile.svg');
-    --front:url('assets/world/foreground-night-mobile.svg')
+    --distant:url('assets/world/distant-night-mobile.svg?v=20261021-art2');
+    --summits:url('assets/world/summits-night-mobile.svg?v=20261021-art2');
+    --ridge:url('assets/world/ridge-night-mobile.svg?v=20261021-art2');
+    --front:url('assets/world/foreground-night-mobile.svg?v=20261021-art2')
   }
   :root[data-sky=day] {
-    --distant:url('assets/world/distant-day-mobile.svg');
-    --ridge:url('assets/world/ridge-day-mobile.svg');
-    --front:url('assets/world/foreground-day-mobile.svg')
+    --distant:url('assets/world/distant-day-mobile.svg?v=20261021-art2');
+    --summits:url('assets/world/summits-day-mobile.svg?v=20261021-art2');
+    --ridge:url('assets/world/ridge-day-mobile.svg?v=20261021-art2');
+    --front:url('assets/world/foreground-day-mobile.svg?v=20261021-art2')
   }
   :root[data-sky=sunset] {
-    --distant:url('assets/world/distant-sunset-mobile.svg');
-    --ridge:url('assets/world/ridge-sunset-mobile.svg');
-    --front:url('assets/world/foreground-sunset-mobile.svg')
+    --distant:url('assets/world/distant-sunset-mobile.svg?v=20261021-art2');
+    --summits:url('assets/world/summits-sunset-mobile.svg?v=20261021-art2');
+    --ridge:url('assets/world/ridge-sunset-mobile.svg?v=20261021-art2');
+    --front:url('assets/world/foreground-sunset-mobile.svg?v=20261021-art2')
   }
   .wrap {
     width:calc(100% - 40px)
@@ -1253,16 +1247,16 @@ h3 {
   }
   .hero {
     height:calc(100svh - 78px);
-    min-height:650px;
+    min-height:570px;
     max-height:860px;
-    padding-top:70px
+    padding-top:62px
   }
   .hero-copy {
     padding-top:0;
     max-width:100%
   }
   .hero h1 {
-    font-size:clamp(49px,13vw,65px);
+    font-size:clamp(43px,11.5vw,56px);
     letter-spacing:-2.8px;
     margin-bottom:17px
   }
@@ -1293,9 +1287,10 @@ h3 {
     gap:10px
   }
   .cloud-companion {
-    width:102px;
-    right:5%;
-    top:48%;
+    width:100px;
+    left:8%;
+    right:auto;
+    top:51%;
     padding:10px;
     z-index:1
   }
@@ -1307,37 +1302,18 @@ h3 {
   }
   .scenery {
     height:100%;
-    background-size:100% auto;
-    bottom:-7vh
+    background-size:100% 100%;
+    bottom:0
   }
-  .distant {
-    bottom:-6vh
-  }
-  .summits {
-    /* A separate phone crop puts the high peak beside the cloud, below copy. */
-    left:auto;
-    right:-15svh;
-    width:87svh;
-    height:58svh;
-    background-size:contain;
-    background-position:right bottom;
-    bottom:-3svh;
-    opacity:.78;
-    filter:var(--massif-light)
-  }
-  .ridge {
-    bottom:-13vh;
-    opacity:.82
-  }
-  .foreground {
-    bottom:-8vh
-  }
+  .summits { bottom:-1% }
+  .ridge { bottom:-2% }
+  .foreground { bottom:-3% }
   .world-shade {
     background:linear-gradient(180deg,transparent 20%,#07111c00 45%,#0e182326 100%)
   }
   .cloud-one {
     left:-3%;
-    top:51%;
+    top:73%;
     width:78px;
     opacity:.3
   }
@@ -1449,7 +1425,7 @@ h3 {
   .adventures-copy {
     width:100%;
     padding:25px 14px;
-    background:radial-gradient(ellipse,var(--wash) 10%,var(--wash-edge) 70%,transparent 95%)
+    background:linear-gradient(110deg,var(--wash),var(--wash-edge))
   }
   .section-description {
     font-size:15px;
@@ -1683,20 +1659,5 @@ body {
   }
   .ledge-art {
     mask-image:none
-  }
-}
-.distant {
-  bottom:-17vh;
-  opacity:.42
-}
-.ridge {
-  opacity:.65
-}
-@media(max-width:600px) {
-  .distant {
-    bottom:-13vh
-  }
-  .ridge {
-    opacity:.55
   }
 }
