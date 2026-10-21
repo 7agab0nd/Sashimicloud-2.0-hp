@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jad.exe | Neon Journal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Retro pixel-style font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #05020f;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #22d3ee;   /* cyan */
+      --accent-2: #f97316; /* neon orange */
+      --accent-3: #e11d48; /* magenta */
+      --card: rgba(6, 12, 40, 0.96);
+      --border: rgba(148, 163, 184, 0.35);
+      --shadow-neon: 0 0 22px rgba(34, 211, 238, 0.8);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 0% 0%, #0f172a 0, #020617 45%, #000 100%);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* scanline overlay */
+    body::before {
+      content: "";
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 1px
+      );
+      background-size: 100% 2px;
+      mix-blend-mode: soft-light;
+      opacity: 0.45;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1120px;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 12px;
+      padding: 3px;
+      background: conic-gradient(
+        from 180deg,
+        #22d3ee,
+        #f97316,
+        #e11d48,
+        #a855f7,
+        #22d3ee
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-neon);
+    }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: #020617;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+
+    .brand-text h1 {
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .brand-text p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.4rem;
+    }
+
+    .status-pill {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.8rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+    }
+
+    .nav-link {
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 880px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-right {
+        align-items: flex-start;
+      }
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: radial-gradient(circle at top left, #0f172a, #020617 60%);
+      padding: 1.4rem 1.5rem;
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1.3rem;
+    }
+
+    @media (max-width: 720px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.23), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(236, 72, 153, 0.18), transparent 55%);
+      mix-blend-mode: screen;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-title {
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 14px rgba(34, 211, 238, 0.5);
+    }
+
+    .hero-subtitle {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 32rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-tag {
+      font-size: 0.7rem;
+      padding: 0.24rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--muted);
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      font-size: 0.78rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #22d3ee, #f97316);
+      border-color: transparent;
+      color: #020617;
+      box-shadow: 0 0 18px rgba(34, 211, 238, 0.75);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 26px rgba(34, 211, 238, 0.9);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+      box-shadow: 0 0 18px rgba(34, 211, 238, 0.5);
+    }
+
+    .btn-primary .chevron {
+      font-size: 1rem;
+    }
+
+    /* HERO IMAGE */
+
+    .hero-art {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pixel-frame {
+      position: relative;
+      padding: 0.4rem;
+      border-radius: 0.7rem;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(249, 115, 22, 0.6),
+        rgba(249, 115, 22, 0.6) 3px,
+        rgba(34, 211, 238, 0.8) 3px,
+        rgba(34, 211, 238, 0.8) 6px
+      );
+      box-shadow: 0 0 26px rgba(59, 130, 246, 0.9);
+      animation: framePulse 3.2s infinite alternate;
+    }
+
+    .pixel-frame-inner {
+      border-radius: 0.4rem;
+      background: #020617;
+      padding: 0.6rem;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+    }
+
+    .pixel-frame img {
+      display: block;
+      width: 210px;
+      height: 210px;
+      image-rendering: pixelated;
+    }
+
+    .pixel-caption {
+      margin-top: 0.55rem;
+      font-size: 0.7rem;
+      text-align: center;
+      color: var(--muted);
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      line-height: 1.4;
+    }
+
+    @keyframes framePulse {
+      from {
+        transform: translateY(2px);
+        box-shadow: 0 0 16px rgba(34, 211, 238, 0.65);
+      }
+      to {
+        transform: translateY(-2px);
+        box-shadow: 0 0 30px rgba(236, 72, 153, 0.9);
+      }
+    }
+
+    /* POSTS */
+
+    .section-title {
+      margin: 2rem 0 0.6rem;
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .posts {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .post {
+      position: relative;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: 1rem 1.1rem;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease,
+        border-color 0.12s ease;
+      overflow: hidden;
+    }
+
+    .post::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(56, 189, 248, 0.12),
+        transparent
+      );
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.12s ease;
+    }
+
+    .post:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.8);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.85);
+    }
+
+    .post:hover::before {
+      opacity: 1;
+    }
+
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .post-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    .post-meta {
+      font-size: 0.72rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .post-meta-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--muted);
+    }
+
+    .pill {
+      font-size: 0.7rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(34, 211, 238, 0.1);
+      border: 1px solid rgba(34, 211, 238, 0.9);
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .post-excerpt {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    .post-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .post-tag {
+      font-size: 0.7rem;
+      padding: 0.12rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: var(--muted);
+    }
+
+    .post-body {
+      margin-top: 0.7rem;
+      font-size: 0.9rem;
+      color: var(--text);
+      display: none;
+    }
+
+    .post-body p + p {
+      margin-top: 0.6rem;
+    }
+
+    .post-body ul {
+      margin: 0.4rem 0 0 1.1rem;
+      list-style: square;
+      font-size: 0.9rem;
+    }
+
+    .post.open .post-body {
+      display: block;
+    }
+
+    .post.open::after {
+      content: "▶ OPEN LOG";
+      position: absolute;
+      top: 0.75rem;
+      right: 0.8rem;
+      font-size: 0.6rem;
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: var(--accent-2);
+    }
+
+    /* SIDEBAR */
+
+    aside {
+      position: sticky;
+      top: 1.5rem;
+      align-self: flex-start;
+    }
+
+    @media (max-width: 880px) {
+      aside {
+        position: static;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 1.4rem;
+      border: 1px solid var(--border);
+      padding: 1.2rem 1.2rem 1.25rem;
+      margin-bottom: 1.4rem;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .card h2 {
+      font-size: 0.95rem;
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .about-highlights {
+      list-style: none;
+      margin-top: 0.6rem;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .about-highlights li {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .about-highlights span.bullet {
+      font-size: 0.85rem;
+      color: var(--accent-2);
+      margin-top: 0.06rem;
+    }
+
+    .list {
+      list-style: none;
+      margin-top: 0.45rem;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      padding: 0.28rem 0;
+    }
+
+    .list-label {
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.7rem;
+    }
+
+    .chip {
+      font-size: 0.78rem;
+      padding: 0.26rem 0.7rem;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      color: var(--muted);
+      text-decoration: none;
+      background: rgba(15, 23, 42, 0.9);
+      transition: border-color 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .chip:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 15px rgba(34, 211, 238, 0.7);
+    }
+
+    footer {
+      margin-top: 2.4rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer span.glitch {
+      color: var(--accent-3);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="avatar">
+          <div class="avatar-inner">J</div>
+        </div>
+        <div class="brand-text">
+          <h1>Jad.exe</h1>
+          <p>Student × athlete × neon overthinker.</p>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>Journal: Recording</span>
+        </div>
+        <a href="archive.html" class="nav-link">/archive</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- LEFT: HERO + POSTS -->
+      <section aria-label="Main content">
+        <section class="hero" id="top">
+          <div class="hero-inner">
+            <p class="hero-label">Personal log // 01</p>
+            <h2 class="hero-title">
+              A quiet corner of the net<br />for my thoughts &amp; training logs.
+            </h2>
+            <p class="hero-subtitle">
+              A retro-future corner of the net where I write about cycling,
+              running, swimming, gaming with side projects, and trying to stay
+              human in a very digital city.
+            </p>
+
+            <div class="hero-tags">
+              <span class="hero-tag">Life</span>
+              <span class="hero-tag">Training</span>
+              <span class="hero-tag">Random thoughts</span>
+            </div>
+
+            <div class="hero-cta">
+              <a href="#latest" class="btn-primary">
+                <span>Read latest entry</span>
+                <span class="chevron">▶</span>
+              </a>
+              <a href="#about" class="btn-ghost">
+                <span>Who’s writing this?</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-art">
+            <div class="pixel-frame">
+              <div class="pixel-frame-inner">
+                <!-- MAIN CAT IMAGE -->
+                <img src="nyan_cat.png" alt="Pixel cat flying through space" />
+                <div class="pixel-caption">
+                  // mascot: nyan-protocol.<br />
+                  // mood: cruising through the galaxy.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <h3 class="section-title" id="latest">Latest entries</h3>
+
+        <section class="posts">
+          <!-- POST 1 -->
+          <article class="post open">
+            <div class="post-header">
+              <div>
+                <h4 class="post-title">City lights, tired legs, and overthinking</h4>
+                <div class="post-meta">
+                  <span>Dec 2, 2025</span>
+                  <span class="post-meta-dot"></span>
+                  <span>5 min read</span>
+                </div>
+              </div>
+              <span class="pill">Featured</span>
+            </div>
+            <p class="post-excerpt">
+              After a long day of classes and a late run, the city felt like a
+              video game loading screen and my brain refused to shut up.
+            </p>
+            <div class="post-tags">
+              <span class="post-tag">Late night</span>
+              <span class="post-tag">Feelings</span>
+              <span class="post-tag">Running</span>
+            </div>
+            <div class="post-body">
+              <p>
+                There’s a specific kind of silence when it’s late and almost
+                everyone is asleep. It’s not really quiet — there’s a bus in the
+                distance, a car door, some random siren — but it feels like the
+                world is on pause.
+              </p>
+              <p>
+                That’s when my thoughts usually get the loudest. Future plans,
+                training goals, dumb memories from years ago, conversations I
+                wish I handled differently. All playing at once like different
+                tabs in a browser.
+              </p>
+              <p>
+                Walking home after a run helps. My legs are tired, my brain is
+                buzzing, but at least I feel like I’m moving while I think,
+                instead of just lying in bed staring at the ceiling.
+              </p>
+            </div>
+          </article>
+
+          <!-- POST 2 -->
+          <article class="post">
+            <div class="post-header">
+              <div>
+                <h4 class="post-title">Balancing classes, people, and recovery days</h4>
+                <div class="post-meta">
+                  <span>Nov 20, 2025</span>
+                  <span class="post-meta-dot"></span>
+                  <span>4 min read</span>
+                </div>
+              </div>
+            </div>
+            <p class="post-excerpt">
+              Some days I want to see everyone and hit every workout. Other days
+              I just want music, a hoodie, and zero plans.
+            </p>
+            <div class="post-tags">
+              <span class="post-tag">Life</span>
+              <span class="post-tag">Student</span>
+              <span class="post-tag">Training</span>
+            </div>
+            <div class="post-body">
+              <p>
+                I’m still figuring out how much social and training energy I
+                actually have. I love my people and I love pushing myself, but
+                I also really need time where nobody needs anything from me.
+              </p>
+              <p>
+                Lately I’ve been trying a simple rule: one “full” day, one
+                “soft” day. Full days are for classes, workouts, plans, being
+                around people. Soft days are for slow mornings, games,
+                journaling, or doing nothing on purpose.
+              </p>
+              <p>
+                It sounds small, but it helps me say “no” without feeling guilty
+                and say “yes” when I actually have the energy to show up.
+              </p>
+            </div>
+          </article>
+
+          <!-- POST 3 -->
+          <article class="post">
+            <div class="post-header">
+              <div>
+                <h4 class="post-title">Three tiny upgrades to my brain firmware</h4>
+                <div class="post-meta">
+                  <span>Oct 31, 2025</span>
+                  <span class="post-meta-dot"></span>
+                  <span>3 min read</span>
+                </div>
+              </div>
+            </div>
+            <p class="post-excerpt">
+              No giant self-help arc, just little rituals that make training,
+              studying, and existing feel less scrambled.
+            </p>
+            <div class="post-tags">
+              <span class="post-tag">Habits</span>
+              <span class="post-tag">Mood</span>
+            </div>
+            <div class="post-body">
+              <p>
+                Instead of trying to “reboot my life”, I patched a few tiny
+                glitches. Nothing dramatic, just small things that make days
+                smoother.
+              </p>
+              <ul>
+                <li>Putting on Brain.fm when I need to focus instead of random playlists.</li>
+                <li>A 10-minute walk after long screen time or hard training.</li>
+                <li>A rough shutdown time for devices most nights.</li>
+              </ul>
+              <p>
+                None of these fix everything, but they give the day a start,
+                a middle, and an end. That already feels like an upgrade.
+              </p>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <!-- RIGHT: SIDEBAR -->
+      <aside aria-label="Sidebar">
+        <section class="card" id="about">
+          <h2>About the writer</h2>
+          <p>
+            I’m Jad — student, athlete, and nerd. I split my time between
+            lectures, long rides, runs, swims, and way too many thoughts.
+          </p>
+          <ul class="about-highlights">
+            <li>
+              <span class="bullet">▶</span>
+              <span>Balancing training, classes, and weird side quests.</span>
+            </li>
+            <li>
+              <span class="bullet">▶</span>
+              <span>Powered by Brain.fm, playlists, and late-night walks.</span>
+            </li>
+            <li>
+              <span class="bullet">▶</span>
+              <span>This blog = my save file for feelings &amp; memories.</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h2>Current status</h2>
+          <ul class="list">
+            <li>
+              <span class="list-label">Headspace</span>
+              <span>Thinking about the next race + exam</span>
+            </li>
+            <li>
+              <span class="list-label">Body</span>
+              <span>Torn between “rest” and “one more session”</span>
+            </li>
+            <li>
+              <span class="list-label">Reminder</span>
+              <span>Recovery is also part of training</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h2>Elsewhere on the net</h2>
+          <p>Places where I might exist online:</p>
+          <div class="socials">
+            <!-- replace # with your actual links -->
+            <a href="https://www.instagram.com/pyjamathlete/" class="chip">Instagram</a>
+            <a href="https://discord.gg/RQPpyBXb" class="chip">Discord</a>
+            <a href="#top" class="chip">Back to top ↑</a>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer>
+      <p>
+        © <span id="year"></span> <span class="glitch">Jad.exe</span> ·
+        All late night thoughts reserved.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // expand / collapse posts
+    const posts = document.querySelectorAll(".post");
+    posts.forEach((post) => {
+      post.addEventListener("click", (e) => {
+        const tag = e.target.tagName.toLowerCase();
+        if (tag === "a" || tag === "button") return;
+        post.classList.toggle("open");
+      });
+    });
+  </script>
+</body>
+</html>
+
