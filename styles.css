@@ -173,11 +173,20 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible {
 }
 .summits {
   background-image:url('assets/alpine-massif.webp');
-  height:100%;
-  background-size:100% auto;
+  /* Keep the complete 3:2 image inside its layer. A viewport-height layer
+     with a width-sized background cropped the summit on wide screens. */
+  left:auto;
+  right:0;
+  width:min(100vw,120svh);
+  height:min(66.666667vw,80svh);
+  background-size:contain;
+  background-position:right bottom;
+  background-repeat:no-repeat;
+  mask-image:linear-gradient(90deg,transparent,#000 26%);
+  opacity:.78;
   filter:var(--massif-light);
   transform:translate3d(0,var(--layer-y),0);
-  bottom:-16vh
+  bottom:-4svh
 }
 .ridge {
   background-image:var(--ridge);
@@ -998,9 +1007,6 @@ h3 {
   color:var(--accent)
 }
 @media(min-aspect-ratio:19/10) {
-  .summits {
-    bottom:-24vh
-  }
   .hero {
     padding-top:6vh
   }
@@ -1017,10 +1023,6 @@ h3 {
   }
   .hero h1 {
     font-size:104px
-  }
-  .summits {
-    background-size:100% auto;
-    bottom:-25vh
   }
   .hero {
     padding-top:18vh
@@ -1059,10 +1061,6 @@ h3 {
   }
   .upper-sections {
     gap:8%
-  }
-  .summits {
-    background-size:auto 85%;
-    background-position:60% bottom
   }
   .cat-ledge {
     right:0
@@ -1316,11 +1314,15 @@ h3 {
     bottom:-6vh
   }
   .summits {
-    height:100%;
-    width:100%;
-    background-size:auto 63%;
-    background-position:68% bottom;
-    bottom:-3vh;
+    /* A separate phone crop puts the high peak beside the cloud, below copy. */
+    left:auto;
+    right:-15svh;
+    width:87svh;
+    height:58svh;
+    background-size:contain;
+    background-position:right bottom;
+    bottom:-3svh;
+    opacity:.78;
     filter:var(--massif-light)
   }
   .ridge {
