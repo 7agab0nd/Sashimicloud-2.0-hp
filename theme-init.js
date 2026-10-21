@@ -1,0 +1,2 @@
+/* Applied before CSS paints; no request and no dependency. */
+(()=>{const r=document.documentElement;r.classList.add('js');let preference='auto';try{const saved=localStorage.getItem('sashimicloud-sky');if(['auto','day','sunset','night'].includes(saved))preference=saved}catch{}const h=new Date().getHours();r.dataset.preference=preference;r.dataset.sky=preference==='auto'?(h>=7&&h<17?'day':h>=17&&h<20?'sunset':'night'):preference;})();
