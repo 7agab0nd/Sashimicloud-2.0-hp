@@ -1,0 +1,23 @@
+/* A quiet detour in the same mountain world. Only loaded on the 404 page. */
+.lost-main{min-height:calc(100svh - 226px);display:grid;place-items:center;padding-block:38px 72px}
+.lost-page{width:min(100%,660px);text-align:center;position:relative;isolation:isolate}
+.lost-page::before{content:"";position:absolute;inset:-35px -80px;z-index:-1;background:radial-gradient(ellipse,var(--reading-shade) 15%,transparent 72%);pointer-events:none}
+.lost-page>.eyebrow{margin:0;color:var(--accent);font-size:10px;letter-spacing:2.8px}
+.lost-art{display:flex;align-items:center;justify-content:center;height:clamp(160px,23vw,240px);margin:8px 0 16px;font:500 clamp(160px,24vw,250px)/1 'Space Grotesk',sans-serif;letter-spacing:-.08em;color:var(--ink);text-shadow:0 8px 40px var(--sky-top)}
+.lost-orbit{position:relative;width:.75em;height:1em;margin-inline:.025em;letter-spacing:0;display:grid;place-items:center}
+.lost-zero{opacity:.15;font-weight:400}
+.lost-orbit img{position:absolute;width:82%;height:auto;left:9%;top:36%;transform:rotate(-9deg);filter:drop-shadow(0 12px 18px rgba(0,0,0,.2))}
+.lost-spark{position:absolute;right:0;top:20%;color:var(--accent);font-size:20px;line-height:1}
+.lost-page h1{font:500 clamp(32px,4.5vw,48px)/1.15 'Space Grotesk',sans-serif;letter-spacing:-1.8px;margin:0;text-wrap:balance}
+.lost-intro{color:var(--muted);font-size:16px;line-height:1.8;margin:18px 0 26px}
+.lost-home{display:inline-flex;gap:20px;align-items:center;justify-content:center;min-height:48px}
+.lost-routes{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;max-width:500px;margin:40px auto 0;text-align:left}
+.lost-routes>p{grid-column:1/-1;text-align:center;font:9px/1.6 'IBM Plex Mono',monospace;letter-spacing:1.8px;color:var(--quiet);margin:0 0 17px}
+.lost-routes>a{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:16px 0 8px;font-size:14px;transition:color .2s}
+.lost-routes small{display:block;font-size:11px;color:var(--muted);margin-top:3px}
+.lost-routes>a>span:last-child{color:var(--accent);font-size:19px}
+.lost-routes>a:hover{color:var(--accent)}
+@media(max-width:600px){.lost-main{min-height:calc(100svh - 188px);padding-block:38px 54px}.lost-page::before{inset:-25px -20px}.lost-art{margin-block:12px 24px}.lost-routes{gap:0 20px;margin-top:34px}.lost-routes small{font-size:10px}.lost-page h1{letter-spacing:-1.2px}}
+@media(max-width:360px){.lost-routes{grid-template-columns:1fr}.lost-routes>a{padding-block:12px}.lost-routes small{font-size:11px}}
+
+.lost-routes{padding:18px 24px 20px;background:var(--reading-shade);border:1px solid var(--line);border-radius:8px}
