@@ -1,0 +1,13 @@
+SashimiCloud photo update — 2 November 2026
+
+Unzip this package, then upload its contents to the root of your existing website repository (the folder containing index.html). Replace the five matching HTML/CSS/JS files and add assets/photos. Commit the changes; your existing hosting process can publish them.
+
+Included: index.html, about.html, adventures.html, photos.css, photos.js, and assets/photos.
+
+The homepage now includes a wide mountain banner, a personal introduction with hiking photo, and a horseback/forest gallery with a journal link. About includes the hiking photo. Adventures includes six selected photos. Photos enlarge on click, close with Escape, and retain ordinary image links without JavaScript.
+
+Images have responsive WebP variants, stripped metadata, descriptive alt text, and lazy loading below the banner. Existing sky themes, cat/cloud interactions, journal, navigation, and training-plan links remain.
+
+Prepared against your saved SashimiCloud_with_Bouldering_Plan.zip plus SashimiCloud_Training_Update.zip. This package contains only the photo update; other repository files are not included. If these three HTML pages have newer changes in GitHub, merge those changes before replacing them.
+
+Verification: browser-checked desktop layout, image loading, enlargement, Escape dismissal, and focus restoration. Local asset and navigation paths checked. Mobile stacking and crops implemented in CSS; a physical-phone check remains advisable. This package has not been pushed or published to sashimicloud.com.
