@@ -13,3 +13,5 @@ Verified: local page and asset references, responsive image references, removal 
 Layout adjustment: the opening illustration now occupies the full first screen; the photo banner starts below it.
 
 Latest adjustment: cat and ledge raised by 12 CSS pixels; the Val-David homepage card now includes the boulder photograph directly.
+
+Location corrections: opening photo is a view from Sulphur Mountain, Alberta. The stream is in Parc national de la Mauricie, Quebec, and is now separated from the Alberta collection.
