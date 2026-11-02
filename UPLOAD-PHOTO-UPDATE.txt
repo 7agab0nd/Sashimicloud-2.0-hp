@@ -9,3 +9,5 @@ The three old journal entries have been removed from the homepage, journal index
 Prepared from the saved website source and the photo changes previously supplied. Existing training-plan files are not changed by this update. Your GitHub repository remains the source of the live website; this package has not been pushed or published.
 
 Verified: local page and asset references, responsive image references, removal of old post titles from HTML, valid RSS/sitemap, and desktop browser rendering/navigation of the new photo entry and journal.
+
+Layout adjustment: the opening illustration now occupies the full first screen; the photo banner starts below it.
