@@ -1,7 +1,7 @@
 /* Personal photographs, composed within the existing mountain world. */
 .photo-home .hero{height:calc(100svh - 106px);min-height:610px;max-height:none;padding-top:65px}
 .photo-home .hero-copy{max-width:580px}
-.photo-home .cat-ledge{transform:scale(.72);transform-origin:right bottom;bottom:22px}
+.photo-home .cat-ledge{transform:scale(.72);transform-origin:right bottom;bottom:34px}
 .photo-home .cloud-companion{top:38px}
 .photo-banner{padding-top:12px;margin-bottom:110px}
 .photo-frame{margin:0;min-width:0}
@@ -55,3 +55,6 @@ html.photo-viewing{overflow:hidden}
 .quebec-entry{margin:0 0 70px}.quebec-entry .photo-frame{margin:24px 0 12px}.quebec-entry .photo-open{aspect-ratio:4/3}.journal-surface>.journal-entry{margin:20px 0 28px}
 
 @media(min-width:601px) and (max-width:800px){.photo-home .hero{height:calc(100svh - 84px);min-height:610px}}
+
+/* Preview the Québec entry directly from the homepage. */
+.photo-journal-card .entry-photo{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:7px;margin:0 0 22px}

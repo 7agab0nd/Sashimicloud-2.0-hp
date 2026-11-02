@@ -11,3 +11,5 @@ Prepared from the saved website source and the photo changes previously supplied
 Verified: local page and asset references, responsive image references, removal of old post titles from HTML, valid RSS/sitemap, and desktop browser rendering/navigation of the new photo entry and journal.
 
 Layout adjustment: the opening illustration now occupies the full first screen; the photo banner starts below it.
+
+Latest adjustment: cat and ledge raised by 12 CSS pixels; the Val-David homepage card now includes the boulder photograph directly.
