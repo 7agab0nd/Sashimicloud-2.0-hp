@@ -1,17 +1,7 @@
-SashimiCloud photo and journal refresh
+Upload the extracted files to your existing website repository root, preserving folders and replacing matching files, then commit. Upload all included files.
 
-Upload the extracted contents to your existing repository root, preserving the assets/, journal/, and legacy/ folders. Replace the matching files and commit. Upload every included file so the old posts also disappear from their old URLs and the legacy page.
+Includes the full photo update and subsequent fixes: full-height opening illustration, slightly raised desktop cat, restored phone/tablet cat and cloud, homepage boulder preview, a separate Val-David photo entry, removal of three old journal entries (including legacy copies and retired-page replacements), refreshed feed/sitemap, and simpler wording.
 
-This update includes all previous photo-layout improvements, simpler wording, Alberta, Canada labels, a separate Val-David, Québec photo entry, and a fresh journal containing that factual photo entry. The boulder photograph is separated from the Alberta collection. No visit dates, route names, or climbing claims have been invented.
+Locations: opening photo is a view from Sulphur Mountain, Alberta; the stream is in Parc national de la Mauricie, Quebec; the boulder is in Val-David, Quebec. Quebec photos are separated from the Alberta collection.
 
-The three old journal entries have been removed from the homepage, journal index, legacy page, RSS feed, and sitemap. Their individual HTML pages now contain a neutral removed-entry message with noindex and a link to the current journal. These replacements are included to avoid requiring manual deletion in GitHub.
-
-Prepared from the saved website source and the photo changes previously supplied. Existing training-plan files are not changed by this update. Your GitHub repository remains the source of the live website; this package has not been pushed or published.
-
-Verified: local page and asset references, responsive image references, removal of old post titles from HTML, valid RSS/sitemap, and desktop browser rendering/navigation of the new photo entry and journal.
-
-Layout adjustment: the opening illustration now occupies the full first screen; the photo banner starts below it.
-
-Latest adjustment: cat and ledge raised by 12 CSS pixels; the Val-David homepage card now includes the boulder photograph directly.
-
-Location corrections: opening photo is a view from Sulphur Mountain, Alberta. The stream is in Parc national de la Mauricie, Quebec, and is now separated from the Alberta collection.
+The cat and cloud were verified visibly rendered in a 390px-wide browser frame, and the cat button remained clickable. This update has not been pushed or published to the live site. Training-plan files are unchanged.

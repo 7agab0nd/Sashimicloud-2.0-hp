@@ -41,8 +41,8 @@
 .photo-dialog p{font-size:13px;color:#c8ceda;margin:16px 0 0;text-align:center}
 .photo-close{position:absolute;top:10px;right:12px;background:#22334a;border:1px solid #ffffff44;color:#fff;border-radius:6px;min-width:44px;min-height:44px;padding:5px 15px}
 html.photo-viewing{overflow:hidden}
-@media(max-width:800px){.photo-introduction{gap:30px}.photo-home .cat-ledge{display:none}.photo-home .cloud-companion{right:0;transform:scale(.65)}.photo-editorial{gap:20px}.photo-stack{gap:20px}.photo-journal-card h3{font-size:23px}}
-@media(max-width:600px){.photo-home .hero{height:calc(100svh - 78px);min-height:570px;padding-top:48px}.photo-home .hero-copy{padding-top:0}.photo-home .cloud-companion{display:none}.photo-banner{margin-bottom:65px}.photo-banner .photo-open{aspect-ratio:4/3}.photo-banner img{object-position:42% 48%}.photo-introduction{grid-template-columns:1fr;gap:30px;margin-bottom:70px}.photo-intro-copy p:not(.eyebrow){max-width:100%}.photo-introduction .photo-open{aspect-ratio:4/3}.outside-lately{padding-bottom:65px}.outside-lately .section-heading{display:block}.outside-lately .section-heading>a{margin-top:10px}.photo-editorial{grid-template-columns:1fr;gap:30px}.photo-tall .photo-open{aspect-ratio:4/5}.photo-stack{gap:30px}.photo-stack .photo-open{aspect-ratio:4/3}.photo-journal-card{padding:5px 0}.photo-collection{gap:28px;grid-template-columns:1fr}.photo-collection .photo-frame:first-child{grid-column:auto}.photo-collection .photo-frame:first-child .photo-open{aspect-ratio:4/3}.photo-collection .photo-open{aspect-ratio:4/5}.photo-dialog{padding:60px 12px 16px}.photo-dialog img{max-height:70svh}}
+@media(max-width:800px){.photo-introduction{gap:30px}.photo-home .cloud-companion{right:0;transform:scale(.65)}.photo-editorial{gap:20px}.photo-stack{gap:20px}.photo-journal-card h3{font-size:23px}}
+@media(max-width:600px){.photo-home .hero{height:calc(100svh - 78px);min-height:570px;padding-top:48px}.photo-home .hero-copy{padding-top:0}.photo-banner{margin-bottom:65px}.photo-banner .photo-open{aspect-ratio:4/3}.photo-banner img{object-position:42% 48%}.photo-introduction{grid-template-columns:1fr;gap:30px;margin-bottom:70px}.photo-intro-copy p:not(.eyebrow){max-width:100%}.photo-introduction .photo-open{aspect-ratio:4/3}.outside-lately{padding-bottom:65px}.outside-lately .section-heading{display:block}.outside-lately .section-heading>a{margin-top:10px}.photo-editorial{grid-template-columns:1fr;gap:30px}.photo-tall .photo-open{aspect-ratio:4/5}.photo-stack{gap:30px}.photo-stack .photo-open{aspect-ratio:4/3}.photo-journal-card{padding:5px 0}.photo-collection{gap:28px;grid-template-columns:1fr}.photo-collection .photo-frame:first-child{grid-column:auto}.photo-collection .photo-frame:first-child .photo-open{aspect-ratio:4/3}.photo-collection .photo-open{aspect-ratio:4/5}.photo-dialog{padding:60px 12px 16px}.photo-dialog img{max-height:70svh}}
 @media(prefers-reduced-motion:reduce){.photo-frame img{transition:none}.photo-open:hover img{transform:none}}
 @media print{.photo-banner,.photo-introduction,.outside-lately,.adventure-photos{break-inside:avoid}.photo-dialog,.photo-expand{display:none}}
 .photo-frame figcaption{display:table;background:var(--panel);color:var(--ink);padding:5px 10px;border-radius:4px}
@@ -58,3 +58,10 @@ html.photo-viewing{overflow:hidden}
 
 /* Preview the Québec entry directly from the homepage. */
 .photo-journal-card .entry-photo{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:7px;margin:0 0 22px}
+
+/* Keep both interactive companions visible on phones and tablets. */
+@media(max-width:800px){.photo-home .cat-ledge{display:block}}
+@media(max-width:600px){
+ .photo-home .cloud-companion{display:block;left:8%;right:auto;top:48%;width:100px;transform:none;z-index:1}
+ .photo-home .cat-ledge{display:block;right:-20px;bottom:74px;width:190px;height:145px;transform:scale(.9);z-index:2}
+}
