@@ -1,0 +1,19 @@
+.pixel-snow { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; image-rendering:pixelated; }
+.mountain-main { min-height:calc(100svh - 180px); }
+.mountain-intro { max-width:620px; }
+.snow-toggle { margin-top:24px; padding:10px 16px; border:1px solid currentColor; border-radius:6px; background:transparent; color:inherit; font:inherit; cursor:pointer; }
+.snow-toggle:focus-visible { outline:2px solid currentColor; outline-offset:4px; }
+@media (prefers-reduced-motion:reduce) { .pixel-snow { display:none; } }
+@media print { .pixel-snow,.snow-toggle { display:none; } }
+
+/* Responsive artwork stays independent of the live snow canvas. */
+.mountaineering-page .world { background:#172c51; }
+.matterhorn-art { position:absolute; inset:0; }
+.matterhorn-art img { width:100%; height:100%; object-fit:cover; object-position:62% 35%; image-rendering:pixelated; }
+.mountaineering-page .world-shade { background:linear-gradient(90deg,rgba(8,15,37,.62),rgba(8,15,37,.15) 65%),linear-gradient(0deg,rgba(8,15,37,.55),transparent 45%); }
+.mountaineering-page .mountain-intro { color:#f5f7ff; }
+.mountaineering-page .mountain-intro .page-intro { color:#e3e9f5; }
+@media (max-width:700px) {
+ .matterhorn-art img { object-position:50% 20%; }
+ .mountaineering-page .world-shade { background:linear-gradient(180deg,rgba(8,15,37,.55),rgba(8,15,37,.3) 60%,rgba(8,15,37,.6)); }
+}

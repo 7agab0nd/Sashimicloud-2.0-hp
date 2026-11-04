@@ -1,0 +1,4 @@
+Current backgrounds: matterhorn-cabin-stars-mobile.png and matterhorn-cabin-stars-desktop.png.
+Built-in imagegen edits: remove airborne snow specks while preserving Matterhorn, twilight clouds, cabin and village lights; extend scene to 16:9 desktop framing with cabin lower left and mountain right; add sparse tiny pixel stars and a few four-point stars only in clear upper sky, preserving all other elements. The star field is static artwork. Snowfall remains a separate live canvas with pause and reduced-motion support.
+
+Copy contents of mountaineering-changes into existing site root. No build or dependencies. No push or deployment performed. JS syntax, snow lifecycle checks and whitespace checks pass. New assets visually inspected; these replacement assets have not been rechecked in browser.
