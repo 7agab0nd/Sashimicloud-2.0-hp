@@ -14,29 +14,49 @@
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="assets/favicon.svg?v=20261021-art2" type="image/svg+xml">
 <script src="theme-init.js"></script><link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="styles.css?v=20261021-launch"><script defer src="site.js?v=20261021-launch"></script>
-<link rel="stylesheet" href="photos.css?v=20261102g"><script defer src="photos.js?v=20261102"></script>
-<link rel="stylesheet" href="mountaineering.css"><script defer src="snow.js"></script>
+<link rel="stylesheet" href="mountaineering.css?v=field-notes"><script defer src="snow.js?v=field-notes"></script>
 </head>
 <body id="home" class="inner-page mountaineering-page">
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="world" aria-hidden="true">
-<picture class="matterhorn-art"><source media="(max-width:700px)" srcset="assets/matterhorn-cabin-stars-mobile.png"><img src="assets/matterhorn-cabin-stars-desktop.png" alt="" fetchpriority="high"></picture>
-<div class="world-shade"></div><canvas class="pixel-snow" aria-hidden="true"></canvas>
+ <div class="sky"></div><div class="stars"></div><div class="moon"></div>
+ <div class="horizon-glow"></div>
+ <div class="scenery distant"></div><svg class="matterhorn scenery" viewBox="0 0 360 240" preserveAspectRatio="xMidYMax meet" shape-rendering="crispEdges" focusable="false">
+  <path class="peak-rock" d="M0 240V222L25 216 45 201 69 194 90 171 113 160 126 143 144 133 153 109 166 100 174 80 185 72 189 49 197 42 197 31 205 22 207 10 214 5 223 12 230 25 232 38 245 50 247 62 257 73 259 84 277 98 285 111 306 125 313 140 331 155 341 176 360 193V240Z"/>
+  <path class="peak-shadow" d="M214 5 223 12 230 25 232 38 245 50 247 62 257 73 259 84 277 98 285 111 306 125 313 140 331 155 341 176 360 193V240H142L161 217 163 196 179 174 184 152 197 137 198 118 210 105 210 91 217 75 214 63 221 50 217 36 221 26 214 17Z"/>
+  <path class="peak-ice" d="M209 14 213 9 219 15 221 23 216 30 216 43 209 51 209 63 200 70 196 88 183 98 176 120 161 131 158 143 140 155 129 168 110 178 126 162 131 151 147 137 154 119 165 110 169 94 180 80 184 63 192 57 193 44 202 35 201 29Z M225 36l8 9 3 12 10 8 6 16 15 15 11 6 5 12-15-7-6-10-13-6-4-11-10-8-3-12-7-9Z M269 118l12 7 6 9 17 11 6 12 13 9 5 12-19-12-9-13-14-8-7-12-11-6Z M189 146l-8 16-13 9-6 18-17 13-5 12-21 9 13-14 6-17 15-11 9-16Z"/>
+  <path class="peak-snow" d="M208 12l6-7 9 7 4 8-9-4-6 4-4 13-7 6 1-9 4-6Z M198 54l7-7-2 13-8 8-2 13-9 8-4 11-13 10 9-18 8-8 3-14Z M166 114l7-7-5 16-13 10-3 9-15 10 10-14 4-10Z M241 60l8 7 3 9-7-4-6-8Z M121 169l-10 11-17 8-7 8-22 8 18-13 7-8Z"/>
+ </svg>
+ <div class="mist mist-one"></div>
+ <div class="ambient-cloud cloud-one"><img src="assets/cloud.svg?v=20261021-art2" width="48" height="26" alt=""></div>
+ <div class="ambient-cloud cloud-two"><img src="assets/cloud.svg?v=20261021-art2" width="48" height="26" alt=""></div>
+ <div class="scenery ridge"></div><div class="mist mist-two"></div><div class="scenery foreground"></div>
+ <div class="world-shade"></div>
+ <canvas class="pixel-snow" aria-hidden="true"></canvas>
 </div>
 <header class="header wrap">
  <a class="brand" href="index.html" aria-label="SashimiCloud home"><img src="assets/cloud-small.svg?v=20261021-art2" alt="" width="48" height="26"><span>Sashimi<span>Cloud</span></span></a>
  <nav class="desktop-nav" aria-label="Main"><a href="index.html">Home</a><a href="journal.html">Journal</a><a href="adventures.html" aria-current="page">Adventures</a><a href="projects.html">Projects</a><a href="about.html">About</a></nav>
  <div class="header-tools">
-  <details class="atmosphere js-only" id="atmosphere"><summary aria-label="Choose sky atmosphere"><span class="sky-icon" aria-hidden="true">☾</span><span id="sky-label">Night</span><span class="chevron" aria-hidden="true">⌄</span></summary><div class="sky-panel"><fieldset><legend>Sky atmosphere</legend><label><input type="radio" name="sky" value="auto" checked>Auto <small>Your local time</small></label><label><input type="radio" name="sky" value="day">Day <span aria-hidden="true">☼</span></label><label><input type="radio" name="sky" value="sunset">Sunset <span aria-hidden="true">◒</span></label><label><input type="radio" name="sky" value="night">Night <span aria-hidden="true">☾</span></label></fieldset></div></details>
+  <details class="atmosphere js-only" id="atmosphere"><summary aria-label="Choose sky atmosphere"><span class="sky-icon" aria-hidden="true">☾</span><span id="sky-label">Night</span><span class="chevron" aria-hidden="true">⌄</span></summary><div class="sky-panel"><fieldset><legend>Sky atmosphere</legend><label><input type="radio" name="sky" value="auto" checked>Auto <small>Your local time</small></label><label><input type="radio" name="sky" value="day">Day <span aria-hidden="true">☼</span></label><label><input type="radio" name="sky" value="sunset">Sunset <span aria-hidden="true">◒</span></label><label><input type="radio" name="sky" value="night">Night <span aria-hidden="true">☾</span></label></fieldset><button class="snow-toggle js-only" type="button" aria-pressed="false">Pause snowfall</button></div></details>
   <details class="mobile-menu" id="mobile-menu"><summary aria-label="Open navigation"><span></span><span></span></summary><nav aria-label="Mobile"><a href="index.html">Home</a><a href="journal.html">Journal</a><a href="adventures.html" aria-current="page">Adventures</a><a href="projects.html">Projects</a><a href="about.html">About</a></nav></details>
  </div>
 </header>
-<main id="main" tabindex="-1" class="inner-main mountain-main">
-<div class="page-wrap wrap"><div class="page-surface reading-surface mountain-intro">
-<a class="text-link" href="adventures.html">← Adventures</a>
-<header class="page-heading"><p class="eyebrow">TOWARD BIGGER MOUNTAINS</p><h1>Mountaineering</h1><p class="page-intro">Something I’m working toward. One step at a time.</p></header>
-<p>A space for mountain plans and the notes I’ll collect along the way.</p>
-<button class="snow-toggle js-only" type="button" aria-pressed="false">Pause snowfall</button>
+<main id="main" tabindex="-1" class="inner-main">
+<div class="page-wrap wrap"><div class="page-surface">
+<header class="page-heading reading-surface"><p class="eyebrow">OUTSIDE</p><h1>Mountaineering</h1><p class="page-intro">Notes on climbing, time outside, and working toward bigger mountains.</p><a class="quiet-link" href="adventures.html">← Adventures</a></header>
+<article class="mountain-note reading-surface" aria-labelledby="mountain-note-title">
+ <p class="eyebrow">FIELD NOTE · <time datetime="2026-11">November 2026</time></p>
+ <h2 id="mountain-note-title">Starting close to home</h2>
+ <div class="prose">
+  <p>I’m starting close to home with a 12-week bouldering plan. One thing I want to practice is placing my feet more deliberately, even on easy climbs.</p>
+  <a class="text-link" href="bouldering.html">Read my bouldering plan <span aria-hidden="true">↗</span></a>
+ </div>
+ <figure class="mountain-note-photo">
+  <img src="assets/photos/valley-640.webp" srcset="assets/photos/valley-640.webp 640w, assets/photos/valley-1280.webp 1280w" sizes="(max-width: 600px) 90vw, 620px" width="1280" height="960" alt="Layered mountain ridges and a river valley under scattered clouds" loading="lazy" decoding="async">
+  <figcaption>View from Sulphur Mountain · Alberta, Canada</figcaption>
+ </figure>
+</article>
 </div></div></main>
 <footer class="footer wrap"><a class="brand" href="index.html"><img src="assets/cloud-small.svg?v=20261021-art2" alt="" width="40" height="24"><span>SashimiCloud</span></a><span class="footer-note">© 2026 Jad</span><a class="feed-link" href="feed.xml" aria-label="Subscribe to the journal RSS feed">RSS</a><a class="old-cat" href="legacy/archive.html" aria-label="See the original Nyan Cat artwork" title="The original site"><img src="legacy/nyan_cat.png" alt="" width="40" height="40"></a><a class="back-top" href="#home" aria-label="Back to top">↑</a></footer>
 <div class="sr-only" role="status" aria-live="polite" id="companion-status"></div>

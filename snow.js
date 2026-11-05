@@ -11,14 +11,14 @@
   let paused = false, visible = true;
   function resize() {
     const rect = canvas.getBoundingClientRect();
-    // One canvas pixel per four CSS pixels, independent of device pixel ratio.
-    width = canvas.width = Math.max(1, Math.ceil(rect.width / 4));
-    height = canvas.height = Math.max(1, Math.ceil(rect.height / 4));
-    const count = Math.min(150, Math.max(24, Math.round(width * height / 450)));
+    // One canvas pixel per two CSS pixels, independent of device pixel ratio.
+    width = canvas.width = Math.max(1, Math.ceil(rect.width / 2));
+    height = canvas.height = Math.max(1, Math.ceil(rect.height / 2));
+    const count = Math.min(72, Math.max(24, Math.round(width * height / 4800)));
     flakes = Array.from({ length: count }, (_, i) => {
       const depth = i % 3;
       return { x: Math.random() * width, y: Math.random() * height,
-        depth, speed: 3 + depth * 3 + Math.random() * 2, phase: Math.random() * Math.PI * 2 };
+        depth, speed: 4 + depth * 3 + Math.random() * 2, phase: Math.random() * Math.PI * 2 };
     });
   }
   function tick(now) {
@@ -33,7 +33,7 @@
       for (const flake of flakes) {
         flake.y = (flake.y + flake.speed * dt) % height;
         flake.x = (flake.x + (wind + Math.sin(elapsed + flake.phase) * 0.5) * (1 + flake.depth * 0.5) * dt + width) % width;
-        ctx.fillStyle = ['#b5c9df66', '#d8e8f099', '#f5faffcc'][flake.depth];
+        ctx.fillStyle = ['#d1e0fa38', '#dce8fa55', '#eef4ff80'][flake.depth];
         const size = flake.depth === 2 ? 2 : 1;
         ctx.fillRect(Math.floor(flake.x), Math.floor(flake.y), size, size);
       }
