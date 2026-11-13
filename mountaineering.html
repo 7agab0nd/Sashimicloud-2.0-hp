@@ -92,6 +92,14 @@ dialog{color:var(--text);background:var(--panel);border:1px solid var(--line);bo
 .stage {border-top:2px solid #7197b1}
 .stage h3,.evidence h3 {font-size:1.15rem;margin-bottom:8px}
 .stage-marker {font-size:.91rem;color:var(--accent)}
+.skill-roadmap + .skill-roadmap {margin-top:24px}
+.skill-roadmap .grid {align-items:start}
+.skill-roadmap > h3 {font-size:1.12rem;margin-bottom:9px}
+.skill-card h4 {font-size:1rem;margin:0 0 6px}
+.skill-card p {font-size:.9rem;margin-bottom:8px}
+.skill-card summary {cursor:pointer;color:var(--accent);font-size:.86rem;margin-top:8px}
+.skill-picker-group + .skill-picker-group {margin-top:8px}
+.skill-picker-group summary {cursor:pointer;color:var(--accent);font-size:.88rem}
 .evidence-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .evidence-category {color:var(--accent);font-size:.78rem;margin-bottom:5px}
 .evidence details {border-top:1px solid var(--line);padding-top:9px}
@@ -210,6 +218,34 @@ const sources = {
   altitude: {
     label: "Wilderness Medical Society · Altitude illness guidelines (2024)",
     href: "https://doi.org/10.1016/j.wem.2023.05.013"
+  },
+  montreal: {
+    label: "Alpine Club of Canada · Montréal section",
+    href: "https://alpineclubofcanada.ca/section/montreal/"
+  },
+  acmg: {
+    label: "Association of Canadian Mountain Guides · Guide directory",
+    href: "https://acmg.ca/member-search/"
+  },
+  firstAid: {
+    label: "Canadian Red Cross · Wilderness and remote first aid",
+    href: "https://www.redcross.ca/training-and-certification/first-aid-and-safety-courses/wilderness-remote-marine-first-aid-courses"
+  },
+  partnerCheck: {
+    label: "Petzl · Partner check",
+    href: "https://www.petzl.com/ca/en/sport/tech-tips/basic-techniques/partner-check/PARTNER-CHECK_SPO_a77w0000000PBmDAAW.html"
+  },
+  alpineCourses: {
+    label: "Alpine Club of Canada · Camps and courses",
+    href: "https://help.alpineclubofcanada.ca/en/knowledge-base/about-acc-camps-and-courses"
+  },
+  ast2: {
+    label: "Avalanche Québec · AST 2 prerequisites",
+    href: "https://avalanchequebec.ca/en/training-ast2/"
+  },
+  reddit: {
+    label: "Reddit · The community checklist that inspired this roadmap",
+    href: "https://www.reddit.com/r/Mountaineering/comments/iiheq5/i_built_a_master_list_of_climbing_skills_for/"
   }
 };
 
@@ -285,8 +321,47 @@ const skills = {
   effort: ["Pacing and endurance", "Compare pace, effort and next-day recovery on similar outings."],
   gear: ["Equipment", "Use your usual daypack on practice hikes. Learn technical gear with an instructor in the field."],
   alpine: ["Alpine fundamentals", "Track supervised snow travel, avalanche skills, roped glacier travel and crevasse rescue."],
-  climbing: ["Climbing technique", "Log foot placement, slopers and overhangs alongside grades from your A/B/C plan."]
+  climbing: ["Climbing technique", "Log foot placement, slopers and overhangs alongside grades from your A/B/C plan."],
+  weather: ["Weather and turnaround decisions", "Check the forecast and daylight before leaving, then compare the actual conditions with your plan."],
+  emergency: ["Trip plans and emergency communication", "Share your route and return time. Practise using the communication device you carry."],
+  firstAid: ["Wilderness first aid", "Take a hands-on course and log scenario practice in patient assessment, bleeding control, cold exposure and evacuation planning."],
+  ropeBasics: ["Top-rope checks and rope handling", "Review partner checks, tie-in, belaying, lowering and equipment inspection with your gym or an instructor."],
+  lead: ["Lead climbing and lead belaying", "After meeting your gym’s prerequisites, take an indoor lead course and practise clipping, belaying and fall management under supervision."],
+  outdoorSport: ["Outdoor sport and descent skills", "Take a supervised gym-to-crag course. Log anchor assessment, descent and retreat decisions in the context where you learned them."],
+  scrambling: ["Scrambling and exposure", "Learn route choice, downclimbing and when to turn around with an experienced leader or guide. Log the terrain and conditions."],
+  winter: ["Winter hiking and cold management", "Practise layers, footing, traction and navigation on short winter outings on marked trails. Record the surface, visibility and daylight."],
+  ice: ["Introductory ice climbing", "Start with a supervised top-rope session. Track equipment fit, footwork and tool placement."],
+  avalanche: ["Avalanche terrain and companion rescue", "Take field-based AST 1 before travelling in avalanche terrain. Log forecast and terrain interpretation and companion-rescue drills."],
+  snow: ["Steep snow travel", "In a guided course, practise crampon and ice-axe use, route selection and self-arrest on terrain chosen by the instructor."],
+  glacier: ["Glacier travel and crevasse rescue", "Practise roped glacier travel, snow anchors and rescue scenarios with a qualified instructor. Record the role you performed and the conditions."],
+  multipitch: ["Multipitch rope systems and retreat", "Build on outdoor rope skills with a course covering belay transitions, anchor assessment and descent or retreat planning."],
+  trad: ["Trad protection and anchors", "Practise evaluating and placing protection on the ground with an instructor. Progress to supervised climbing and record the placements you reviewed."],
+  rockRescue: ["Rock self-rescue", "After you are comfortable with the relevant rope systems, take supervised practice in belay escapes, rope ascent and assisted rescue."],
+  touring: ["Ski touring and avalanche decisions", "Build ski and touring experience, practise AST 1 skills and check the course prerequisites before considering AST 2."],
+  expedition: ["Overnight and expedition logistics", "Build from simpler overnight trips. Log shelter, food, fuel, water, group communication and evacuation planning."]
 };
+const skillRoadmap = [
+  {
+    title:"Start around Montréal",
+    ids:["navigation","orientation","terrain","effort","gear","weather","emergency","firstAid","climbing","ropeBasics","lead"],
+    refs:["hiking","firstAid","partnerCheck","montreal"]
+  },
+  {
+    title:"Build outdoor and winter experience",
+    ids:["outdoorSport","scrambling","winter","ice","avalanche"],
+    refs:["ratings","montreal","acmg","avalanche","quebec"]
+  },
+  {
+    title:"Train for alpine terrain",
+    ids:["alpine","snow","glacier"],
+    refs:["alpineCourses","acmg","glacier"]
+  },
+  {
+    title:"Specialize when an objective calls for it",
+    ids:["multipitch","trad","rockRescue","touring","expedition"],
+    refs:["acmg","ast2","alpineCourses"]
+  }
+];
 const types = {hike:"Hike", course:"Course", climb:"Climbing"};
 const statuses = {idea:"Exploring", planned:"Planned", done:"Completed"};
 const fits = {unknown:"To assess", yes:"Good fit", challenge:"Stretch goal", later:"For later"};
@@ -608,18 +683,25 @@ function calendar() {
 
 function skillView() {
   const day = today();
-  return '<div class="section-head"><div><h2>Skills</h2><p class="muted">Set your current level and use completed activities to record where you practised.</p></div></div><div class="grid">' +
-    Object.entries(skills).map(([id,[title,desc]]) => {
-      const related = state.activities.filter(a => a.skills.includes(id)).sort(byDate);
-      const completed = related.filter(a => a.status === "done");
-      const last = completed.filter(a => a.date && a.date <= day).at(-1);
-      return '<article class="panel"><h3>' + title + '</h3><p class="muted">' + desc + '</p>' +
-        '<label class="skill-status">Self-assessed level<select name="skill" aria-label="' + title + ' level" data-id="' + id + '">' +
-          options(levels,state.progress[id] || "discover") + '</select></label>' +
-        '<div class="row"><p class="muted">' + completed.length + ' completed · ' + (related.length - completed.length) + ' open' +
-        (last ? '<br>Last recorded practice ' + escape(dateValue(last.date)) : '') +
-        '</p><div class="actions">' + related.map(a => activityButton(a)).join("") + '</div></div></article>';
-    }).join("") + '</div>';
+  function skillCard(id) {
+    const [title,desc] = skills[id];
+    const related = state.activities.filter(a => a.skills.includes(id)).sort(byDate);
+    const completed = related.filter(a => a.status === "done");
+    const last = completed.filter(a => a.date && a.date <= day).at(-1);
+    const records = related.length
+      ? '<details><summary>' + completed.length + ' completed · ' + (related.length - completed.length) + ' open</summary><div class="actions">' +
+        related.map(a => activityButton(a)).join("") + '</div></details>'
+      : '';
+    return '<article class="panel skill-card"><h4>' + escape(title) + '</h4><p class="muted">' + escape(desc) + '</p>' +
+      '<label class="skill-status">Self-assessed level<select name="skill" aria-label="' + escape(title) + ' level" data-id="' + id + '">' +
+      options(levels,state.progress[id] || "discover") + '</select></label>' +
+      (last ? '<p class="muted">Last recorded practice ' + escape(dateValue(last.date)) + '</p>' : '') + records + '</article>';
+  }
+  return '<div class="section-head"><div><h2>Skills roadmap</h2><p class="muted">Track your level and log where, when and under what conditions you practised. For rope, ice and rescue skills, use qualified instruction and record the feedback you received.</p></div></div>' +
+    skillRoadmap.map(group =>
+      '<section class="skill-roadmap"><h3>' + escape(group.title) + '</h3><div class="grid">' +
+      group.ids.map(skillCard).join("") + '</div>' + sourceLinks(group.refs) + '</section>'
+    ).join("") + sourceLinks(["reddit"]);
 }
 
 function comparison() {
@@ -669,7 +751,7 @@ function trainingGuide() {
   ).join("");
   return '<section><div class="section-head"><div><h2>Training guide</h2>' +
     '<p class="muted">Start with familiar Montréal hills, then choose your next outing based on what you can repeat comfortably and what you’ve practised in the field.</p>' +
-    '</div><button data-action="add">+ Add activity</button></div><ol class="grid stage-grid">' + stages + '</ol></section>' +
+    '</div><button data-tab="skills">Open skills roadmap</button></div><ol class="grid stage-grid">' + stages + '</ol></section>' +
     '<section class="section-gap"><div class="section-head"><h2>Research and field guidance</h2></div>' +
     '<div class="evidence-grid">' + topics + '</div></section>';
 }
@@ -707,9 +789,12 @@ function openEditor(kind,id) {
     selectField("fit","Fit for my level",fits,a.fit) + field("link","Registration link",a.link,"url") +
     area("gear","Equipment",a.gear) + area("prereqs","Prerequisites",a.prereqs) +
     '<fieldset class="wide"><legend>Skills practised or planned</legend>' +
-      Object.entries(skills).map(([key,[label]]) =>
-        '<label class="check"><input name="skills" value="' + key + '" type="checkbox"' +
-        (a.skills.includes(key) ? ' checked' : '') + '>' + label + '</label>'
+      skillRoadmap.map((group,i) =>
+        '<details class="skill-picker-group"' + (i === 0 || group.ids.some(id => a.skills.includes(id)) ? ' open' : '') + '><summary>' +
+        escape(group.title) + '</summary>' + group.ids.map(id =>
+          '<label class="check"><input name="skills" value="' + id + '" type="checkbox"' +
+          (a.skills.includes(id) ? ' checked' : '') + '>' + escape(skills[id][0]) + '</label>'
+        ).join("") + '</details>'
       ).join("") + '</fieldset>' +
     '<fieldset class="wide optional-details"><legend>Training details</legend><div class="form-grid">' +
       field("packWeight","Pack weight (kg)",a.packWeight,"number","min=0 step=0.1") +
